@@ -1,0 +1,12 @@
+2021-02-08 12:26:17.079 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - DB: Finding by email -> annadominie@gmail.com
+2021-02-08 12:26:17.148 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 1
+2021-02-08 12:26:17.151 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 2
+2021-02-08 12:26:17.405 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 3
+2021-02-08 12:26:17.443 [main] ERROR io.github.onetwostory.salon.dao.impl.JDBCUserDao - SQL ERROR HANDLING
+2021-02-08 12:26:17.444 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 4
+2021-02-08 12:28:04.495 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - DB: Finding by email -> annadominie@gmail.com
+2021-02-08 12:28:04.532 [main] INFO  io.github.onetwostory.salon.dao.mapper.UserMapper - Extracting from result set
+2021-02-08 12:28:04.552 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 4
+2021-02-08 12:29:03.569 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - DB: Finding by email -> annadominie@gmail.com
+2021-02-08 12:29:03.770 [main] ERROR io.github.onetwostory.salon.dao.impl.JDBCUserDao - SQL ERROR HANDLING
+2021-02-08 12:29:03.771 [main] INFO  io.github.onetwostory.salon.dao.impl.JDBCUserDao - 4
