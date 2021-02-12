@@ -12,7 +12,7 @@ public class ServiceOptionMapper implements ObjectMapper<ServiceOption>{
         return new ServiceOption.Builder()
                 .id(resultSet.getInt("service_option_id"))
                 .name(resultSet.getString("name"))
-                .description(resultSet.getString("description"))
+                .description(resultSet.getString("service_option_description"))
                 .price(resultSet.getBigDecimal("price"))
                 .build();
     }

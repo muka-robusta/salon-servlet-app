@@ -2,6 +2,7 @@ package io.github.onetwostory.salon.controller.commands;
 
 import io.github.onetwostory.salon.controller.Webpage;
 import io.github.onetwostory.salon.entity.User;
+import io.github.onetwostory.salon.entity.enums.Role;
 import io.github.onetwostory.salon.manager.MessageManager;
 import io.github.onetwostory.salon.manager.SecretManager;
 import io.github.onetwostory.salon.service.UserService;
@@ -50,9 +51,9 @@ public class LoginUser implements Command {
         User loginUser = userOptional.get();
         if (loginUser.getHashedPassword().equals(convertPasswordToHash(password))) {
             request.getSession().setAttribute("user", loginUser);
-            logger.info(String.format("Login operation is successful -> %s", loginUser.getName()));
-            System.out.println("Log in successful");
-            return Webpage.USER_LIST;
+            logger.info(String.format("Login operation is successful -> %s", loginUser));
+            returnWithMessage("indexMessage", "Welcome back!", request);
+            return Webpage.INDEX_PAGE;
         }
 
         request.setAttribute("errorLoginPassMessage", "Wrong credentials");
@@ -89,6 +90,11 @@ public class LoginUser implements Command {
                 SecretManager.getProperty("hash.salt.end");
 
         return SecretManager.getBytesToHex(SecretManager.encodeToSHA256(textToHash));
+    }
+
+    private String returnWithMessage(String attributeMessageName, String attributeMessageValue, HttpServletRequest request) {
+        request.setAttribute(attributeMessageName, attributeMessageValue);
+        return CONTROLLER_PAGE;
     }
 
 }

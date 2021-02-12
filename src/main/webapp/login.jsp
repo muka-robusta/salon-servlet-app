@@ -15,11 +15,13 @@
     <title>Login</title>
 </head>
 <body>
+    <a href="/redirect:/">Back to Menu</a>
+    <br>
     <a href="login?lang=en">Language</a>
     <a href="login?lang=ua">Мова</a>
 
     <h1>${loginform_login}</h1>
-    <form action="login" method="get">
+    <form action="login" method="post">
         <input type="hidden" name="command" value="login">
         <input type="text" name="login_email" placeholder="${loginform_email}"/>
         <input type="password" name="login_password" placeholder="${loginform_password}"/>
@@ -30,5 +32,6 @@
         ${loginform_account_absence_question}
         <a href="register?lang=${lang}">${loginform_register}</a>
     </form>
+
 </body>
 </html>

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ServiceOptionList implements Command{
 
-    private static final String CONTROLLER_PAGE = "client/service_options.jsp";
+    private static final String CONTROLLER_PAGE = "/client/service_options.jsp";
     private static final Logger logger = LogManager.getLogger(ServiceOptionList.class.getName());
     private final ServiceOptionService serviceOptionService;
 

@@ -16,29 +16,11 @@ public class AppointmentMapper implements ObjectMapper<Appointment> {
 
     @Override
     public Appointment extractFromResultSet(ResultSet resultSet) throws SQLException {
-        Integer identifier = resultSet.getInt("appointment_id");
         return new Appointment.Builder()
-                .id(identifier)
+                .id(resultSet.getInt("appointment_id"))
                 .date(resultSet.getDate("appointment_date").toLocalDate())
                 .time(resultSet.getTime("appointment_time").toLocalTime())
-                .client(findUserById(resultSet.getInt("client_id")))
-                .master(findUserById(resultSet.getInt("master_id")))
-                .serviceOptionList(findServiceOptionsByAppointmentId(identifier))
                 .build();
-    }
-
-    private User findUserById(int id) {
-        DaoFactory daoFactory = JDBCDaoFactory.getInstance();
-        try (UserDao userDao = daoFactory.createUserDao()) {
-            return userDao.findById(id);
-        }
-    }
-
-    private List<ServiceOption> findServiceOptionsByAppointmentId(int appointmentId) {
-        DaoFactory daoFactory = JDBCDaoFactory.getInstance();
-        try (ServiceOptionDao serviceOptionDao = daoFactory.createServiceOptionDao()) {
-            return serviceOptionDao.findByAppointment(appointmentId);
-        }
     }
 
 }

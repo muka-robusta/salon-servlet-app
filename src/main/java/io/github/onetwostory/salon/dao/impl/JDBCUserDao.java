@@ -15,6 +15,27 @@ public class JDBCUserDao implements UserDao {
     private Connection connection;
     private final static Logger logger = LogManager.getLogger(JDBCUserDao.class.getName());
 
+    @Override
+    public List<User> findByRole(Role role) {
+        List<User> usersByRole = new ArrayList<>();
+        String findAllMastersQuery = "SELECT * FROM users WHERE role = ?;";
+
+        try (final PreparedStatement preparedStatement = connection.prepareStatement(findAllMastersQuery)) {
+            preparedStatement.setString(1, role.toString());
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            final UserMapper userMapper = new UserMapper();
+
+            while (resultSet.next()) {
+                usersByRole.add(userMapper.extractFromResultSet(resultSet));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return usersByRole;
+    }
+
     public JDBCUserDao(Connection connection) {
         this.connection = connection;
     }
@@ -62,7 +83,7 @@ public class JDBCUserDao implements UserDao {
                 user = userMapper.extractFromResultSet(resultSet);
             }
 
-            return Optional.of(user);
+            return Optional.ofNullable(user);
 
         } catch (SQLException throwables) {
             throw new RuntimeException("Can't connect to DB");
@@ -150,6 +171,10 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

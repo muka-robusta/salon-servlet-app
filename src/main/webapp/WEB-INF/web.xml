@@ -23,7 +23,7 @@
 
     <filter-mapping>
         <filter-name>AccessFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/client/*</url-pattern>
     </filter-mapping>
 
 </web-app>

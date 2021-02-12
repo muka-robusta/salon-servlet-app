@@ -3,6 +3,7 @@ package io.github.onetwostory.salon.controller.commands;
 import io.github.onetwostory.salon.controller.Webpage;
 import io.github.onetwostory.salon.entity.AppointmentApplication;
 import io.github.onetwostory.salon.entity.ServiceOption;
+import io.github.onetwostory.salon.entity.User;
 import io.github.onetwostory.salon.service.AppointmentApplicationService;
 import io.github.onetwostory.salon.service.ServiceOptionService;
 import org.apache.logging.log4j.LogManager;
@@ -30,21 +31,30 @@ public class ApplyForAppointment implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
-        logger.info(String.format("Creating appointment application"));
+        logger.info("Creating appointment application");
 
         if(validateFieldsForNull(request))
             return CONTROLLER_PAGE;
 
-        logger.info("Fetching data from request");
+        logger.info("Fetching data from request by user -> %s", request.getSession().getAttribute("user"));
         AppointmentApplication application = generateServiceOptionByFieldsFromRequest(request);
 
         if (application == null)
-            return CONTROLLER_PAGE;
+            return returnWithMessage("errorMessage",
+                    "Error filling form. All date and time artifacts must be filled.<br> " +
+                            "Maybe service option you entered doesn\'t exists?",
+                    request);
 
         logger.info(String.format("Trying to save application -> %s", application));
         appointmentApplicationService.saveApplication(application);
 
+        returnWithMessage("indexMessage", "Appointment application has registered", request);
         return Webpage.INDEX_PAGE;
+    }
+
+    private String returnWithMessage(String attributeMessageName, String attributeMessageValue, HttpServletRequest request) {
+        request.setAttribute(attributeMessageName, attributeMessageValue);
+        return CONTROLLER_PAGE;
     }
 
     private boolean validateFieldsForNull(HttpServletRequest request) {
@@ -70,6 +80,7 @@ public class ApplyForAppointment implements Command {
                 .appointmentDate(LocalDate.parse(request.getParameter("appointment_date")))
                 .startFreeTime(LocalTime.parse(request.getParameter("appointment_time_start")))
                 .endFreeTime(LocalTime.parse(request.getParameter("appointment_time_end")))
+                .client((User) request.getSession().getAttribute("user"))
                 .build()).orElse(null);
 
     }

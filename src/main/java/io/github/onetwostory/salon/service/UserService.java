@@ -41,4 +41,11 @@ public class UserService {
         }
     }
 
+    public List<User> findMasters() {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            logger.info("Fetching all masters");
+            return userDao.findByRole(Role.MASTER);
+        }
+    }
+
 }

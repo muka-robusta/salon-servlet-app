@@ -11,6 +11,7 @@ public class AppointmentApplication extends BaseEntity {
     private LocalDate appointmentDate;
     private LocalTime startFreeTime;
     private LocalTime endFreeTime;
+    private User client;
 
     public ServiceOption getOption() {
         return option;
@@ -50,6 +51,14 @@ public class AppointmentApplication extends BaseEntity {
 
     public void setEndFreeTime(LocalTime endFreeTime) {
         this.endFreeTime = endFreeTime;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
     }
 
     @Override
@@ -97,6 +106,11 @@ public class AppointmentApplication extends BaseEntity {
 
         public Builder id(Integer id) {
             application.setIdentifier(id);
+            return this;
+        }
+
+        public Builder client(User user) {
+            application.setClient(user);
             return this;
         }
 

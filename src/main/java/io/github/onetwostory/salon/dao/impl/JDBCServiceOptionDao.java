@@ -67,7 +67,7 @@ public class JDBCServiceOptionDao implements ServiceOptionDao {
 
     @Override
     public void create(ServiceOption obj) {
-        String prepareStatementString = "INSERT INTO service_options (name, description, price) " +
+        String prepareStatementString = "INSERT INTO service_options (name, service_option_description, price) " +
                 "VALUES (?,?,?);";
         try (PreparedStatement statement = connection.prepareStatement(prepareStatementString)) {
 
@@ -94,7 +94,11 @@ public class JDBCServiceOptionDao implements ServiceOptionDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override

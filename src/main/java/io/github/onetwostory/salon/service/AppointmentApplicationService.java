@@ -27,4 +27,11 @@ public class AppointmentApplicationService {
         }
     }
 
+    public void deleteApplication(Integer applicationId) {
+        logger.info(String.format("Delete appointment application by id -> %d", applicationId));
+        try (final AppointmentApplicationDao appointmentApplicationDao = daoFactory.createAppointmentApplicationDao()) {
+            appointmentApplicationDao.deleteById(applicationId);
+        }
+    }
+
 }

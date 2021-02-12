@@ -27,4 +27,10 @@ public class ServiceOptionService {
         }
     }
 
+    public void save(ServiceOption serviceOption) {
+        logger.info(String.format("Saving service option -> %s", serviceOption));
+        try (final ServiceOptionDao serviceOptionDao = daoFactory.createServiceOptionDao()) {
+            serviceOptionDao.create(serviceOption);
+        }
+    }
 }

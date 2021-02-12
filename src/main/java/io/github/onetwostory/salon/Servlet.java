@@ -35,7 +35,13 @@ public class Servlet extends HttpServlet {
         commands.put(Webpage.USER_LIST, new UserList(userService));
         commands.put(Webpage.USER_SERVICE, new ServiceOptionList(serviceOptionService));
         commands.put(Webpage.APPLY, new ApplyForAppointment(appointmentApplicationService, serviceOptionService));
-        commands.put(Webpage.HANDLE_APPLICATIONS, new AppointmentSetCommand(appointmentService, appointmentApplicationService));
+        commands.put(Webpage.HANDLE_APPLICATIONS, new AppointmentSetCommand(appointmentService, appointmentApplicationService, serviceOptionService, userService));
+        commands.put(Webpage.CREATE_SERVICE, new AddServiceOptionCommand(serviceOptionService));
+        commands.put(Webpage.USER_PROFILE, new ProfileCommand(userService, appointmentService));
+        commands.put(Webpage.MASTERS, new MasterCommand(userService));
+        commands.put(Webpage.ADMIN_PROFILE, new AdminProfileCommand(userService, appointmentService));
+        commands.put(Webpage.DELETE_APPLICATION, new DeleteApplicationCommand(appointmentApplicationService));
+        commands.put(Webpage.DELETE_APPOINTMENT, new DeleteAppointmentCommand(appointmentService));
     }
 
 
@@ -58,10 +64,20 @@ public class Servlet extends HttpServlet {
         //path = path.replaceAll(".*/" , "");
         logger.info(String.format("requested page -> %s", path));
 
+        if (path.contains("redirect:")) {
+            response.sendRedirect(path.replaceAll("/redirect:", ""));
+            return;
+        }
 
         Command command = commands.getOrDefault(path , (r)->"/index.jsp");
         String page = command.execute(request);
-        request.getRequestDispatcher(page).forward(request, response);
+
+        if (page.contains("redirect:")) {
+            response.sendRedirect(page.replaceAll("/redirect:", ""));
+            return;
+        }
+        else
+            request.getRequestDispatcher(page).forward(request, response);
     }
 
 

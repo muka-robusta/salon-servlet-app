@@ -5,8 +5,10 @@
 </head>
 <body>
 <h1>Salon app</h1>
-<a href="login">Profile</a>
-<a href="service">Service Options</a><br/>
-<a href="user-list">Masters</a>
+<p>${indexMessage}</p>
+<hr>
+<a href="/client/profile">Profile</a><br>
+<a href="/redirect:/client/service">Service Options</a><br/>
+<a href="/masters">Masters</a><br>
 </body>
 </html>

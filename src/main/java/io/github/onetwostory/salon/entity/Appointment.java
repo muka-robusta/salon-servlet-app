@@ -13,6 +13,7 @@ public class Appointment extends BaseEntity {
     private List<ServiceOption> serviceOptionList;
     private User client;
     private User master;
+    private Status status;
 
     public LocalDate getAppointmentDate() {
         return appointmentDate;
@@ -54,6 +55,26 @@ public class Appointment extends BaseEntity {
         this.master = master;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointmentDate=" + appointmentDate +
+                ", appointmentTime=" + appointmentTime +
+                ", serviceOptionList=" + serviceOptionList +
+                ", client=" + client +
+                ", master=" + master +
+                ", status=" + status +
+                '}';
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public static class Builder {
         private Appointment appointment;
 
@@ -88,6 +109,11 @@ public class Appointment extends BaseEntity {
 
         public Builder id(int id) {
             appointment.setIdentifier(id);
+            return this;
+        }
+
+        public Builder status(Status status) {
+            appointment.setStatus(status);
             return this;
         }
 
