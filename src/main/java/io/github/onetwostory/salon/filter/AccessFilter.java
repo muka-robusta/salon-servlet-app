@@ -32,11 +32,14 @@ public class AccessFilter implements Filter {
         httpServletResponse.setDateHeader("Expires", -1);
 
         String requestedURI = httpServletRequest.getRequestURI();
-        logger.info("FILTER -> " + requestedURI);
         if (requestedURI.contains("client")) {
             logger.info("Trying to access /client/*");
             if ((user = (User) httpServletRequest.getSession().getAttribute("user")) != null) {
-                filterChain.doFilter(httpServletRequest, httpServletResponse);
+                if (user.getRole().equals(Role.ADMIN) && requestedURI.equals("/client/profile")) {
+                    logger.info("Admin trying to access profile");
+                    httpServletResponse.sendRedirect(Webpage.ADMIN_PROFILE);
+                } else
+                    filterChain.doFilter(httpServletRequest, httpServletResponse);
             } else {
                 httpServletResponse.sendRedirect(Webpage.LOGIN_PAGE);
             }

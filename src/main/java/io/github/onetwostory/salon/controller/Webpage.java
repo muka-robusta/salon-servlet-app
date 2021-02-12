@@ -14,4 +14,5 @@ public interface Webpage {
     String DELETE_APPLICATION = "/admin/delete_application";
     String ADMIN_PROFILE = "/admin/profile";
     String DELETE_APPOINTMENT = "/admin/delete_appointment";
+    String LOGOUT = "/logout";
 }

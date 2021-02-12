@@ -26,4 +26,24 @@
         <url-pattern>/client/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>io.github.onetwostory.salon.filter.AdminFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+
 </web-app>

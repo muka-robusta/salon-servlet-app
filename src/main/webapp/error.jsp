@@ -11,14 +11,7 @@
     <title>Error page</title>
 </head>
 <body>
-    Request from ${pageContext.errorData.requestURI} is failed
-    <br/>
-    Servlet name: ${pageContext.errorData.servletName}
-    <br/>
-    Status code: ${pageContext.errorData.statusCode}
-    <br/>
-    Exception: ${pageContext.exception}
-    <br/>
-    Message from exception: ${pageContext.exception.message}
+    <h2>Troubles on the way</h2>
+    <p>We have some problems, try to perform action again properly or contact admin.</p>
 </body>
 </html>

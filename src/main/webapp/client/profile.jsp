@@ -30,6 +30,7 @@
     </table>
 
     <a href="/redirect:/">Menu</a>
+    <a href="/redirect:/logout">Logout</a>
 
     <h2>Appointments:</h2>
     <table border="1px solid" cellspacing="0" cellpadding="5px">

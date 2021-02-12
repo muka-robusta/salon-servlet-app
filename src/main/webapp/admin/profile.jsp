@@ -33,7 +33,7 @@
     <p>
         <a href="/redirect:/">Menu</a><br>
         <a href="handle">Handle applications</a><br>
-        <%--<a href="">Logout</a><br>--%>
+        <a href="/redirect:/logout">Logout</a><br>
         <a href="create_service_option">Add Service Option</a>
     </p>
     <h2>Appointments:</h2>

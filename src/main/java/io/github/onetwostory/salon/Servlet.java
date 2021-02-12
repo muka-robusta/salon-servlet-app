@@ -42,6 +42,7 @@ public class Servlet extends HttpServlet {
         commands.put(Webpage.ADMIN_PROFILE, new AdminProfileCommand(userService, appointmentService));
         commands.put(Webpage.DELETE_APPLICATION, new DeleteApplicationCommand(appointmentApplicationService));
         commands.put(Webpage.DELETE_APPOINTMENT, new DeleteAppointmentCommand(appointmentService));
+        commands.put(Webpage.LOGOUT, new LogoutCommand());
     }
 
 
